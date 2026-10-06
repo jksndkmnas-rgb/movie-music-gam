@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie Music Challenge</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:#090909;color:#fff;font-family:Arial,Helvetica,sans-serif
+}
+.game{width:min(900px,94vw);padding:24px 0}
+h1{text-align:center;margin:0 0 18px;font-size:clamp(28px,6vw,52px)}
+.card{background:#151515;border:1px solid #303030;border-radius:18px;padding:16px}
+.start-screen{text-align:center;padding:50px 20px}
+.start-screen h2{font-size:34px;margin:0 0 12px}
+.start-screen p{color:#aaa;margin:0 0 25px}
+.top{display:flex;justify-content:space-between;gap:12px;margin-bottom:14px}
+.video-wrap{background:#000;border-radius:12px;overflow:hidden}
+video{width:100%;height:auto;max-height:60vh;display:block;background:#000;object-fit:contain}
+.status{text-align:center;margin:15px 0;font-size:18px;min-height:24px}
+.buttons{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+button{
+  border:0;border-radius:13px;padding:16px;font-size:20px;font-weight:800;
+  cursor:pointer;background:#eee;color:#111
+}
+button:hover:not(:disabled){filter:brightness(.88)}
+button:disabled{opacity:.45;cursor:not-allowed}
+.start{width:min(360px,100%)}
+.hidden{display:none!important}
+.result{text-align:center}
+.result h2{font-size:clamp(42px,10vw,80px);margin:0 0 10px}
+.result p{font-size:21px;color:#ccc}
+.small{color:#888;font-size:14px;margin-top:15px}
+@media(max-width:560px){
+  .game{padding:14px 0}
+  .buttons{gap:9px}
+  button{font-size:18px;padding:14px}
+}
+</style>
+</head>
+<body>
+<main class="game">
+  <h1>Movie Music Challenge</h1>
+
+  <!-- No video is shown before the game starts -->
+  <section id="startScreen" class="card start-screen">
+    <h2>Can You Match the Movie?</h2>
+    <p>Listen to the music and watch the video. Decide if they belong to the same movie.</p>
+    <button id="startBtn" class="start">START GAME</button>
+  </section>
+
+  <section id="gameScreen" class="hidden">
+    <div class="top">
+      <div class="card">Score: <strong id="score">0</strong></div>
+      <div class="card">Round: <strong id="round">1</strong></div>
+    </div>
+
+    <div class="card">
+      <div class="video-wrap">
+        <video id="gameVideo" playsinline preload="auto"></video>
+      </div>
+
+      <div id="status" class="status">
+        Is the music and video from the same movie?
+      </div>
+
+      <div class="buttons">
+        <button id="yesBtn" type="button">YES</button>
+        <button id="noBtn" type="button">NO</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="resultScreen" class="card result hidden">
+    <h2 id="resultTitle"></h2>
+    <p id="resultText"></p>
+    <div class="video-wrap">
+      <video id="resultVideo" playsinline></video>
+    </div>
+    <button id="restartBtn" class="start">PLAY AGAIN</button>
+  </section>
+</main>
+
+<script src="game.js"></script>
+</body>
+</html>
